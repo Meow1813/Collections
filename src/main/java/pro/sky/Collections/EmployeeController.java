@@ -1,10 +1,12 @@
 package pro.sky.Collections;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
@@ -12,20 +14,20 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping(path = "/employee/add")
+    @GetMapping(path = "/add")
     public String addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
         return employeeService.addEmployee(firstName,lastName);
     }
-    @GetMapping(path = "/employee/remove")
+    @GetMapping(path = "/remove")
     public String removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
         return employeeService.deleteEmployee(firstName,lastName);
     }
-    @GetMapping(path = "/employee/find")
+    @GetMapping(path = "/find")
     public String findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName){
         return employeeService.findEmployee(firstName,lastName);
     }
 
-    @GetMapping(path = "/employee/print")
+    @GetMapping(path = "/print")
     public String print(){
         return employeeService.printEmployeeList();
     }
