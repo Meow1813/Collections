@@ -5,7 +5,7 @@ public interface EmployeeService {
 
     String deleteEmployee(String firstName, String lastName);
 
-    String addEmployee(String firstName, String lastName);
+    String addEmployee(String firstName, String lastName, int department, int salary);
 
     String printEmployeeList();
 
