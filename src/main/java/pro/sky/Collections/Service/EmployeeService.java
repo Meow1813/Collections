@@ -1,4 +1,4 @@
-package pro.sky.Collections;
+package pro.sky.Collections.Service;
 
 public interface EmployeeService {
     String findEmployee(String firstName, String lastName);
