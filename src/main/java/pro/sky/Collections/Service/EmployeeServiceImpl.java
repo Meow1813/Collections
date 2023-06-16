@@ -1,7 +1,10 @@
-package pro.sky.Collections;
+package pro.sky.Collections.Service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import pro.sky.Collections.Employee;
 import pro.sky.Collections.Exception.EmployeeAlreadyAddedException;
+import pro.sky.Collections.Exception.EmployeeInvalidNameException;
 import pro.sky.Collections.Exception.EmployeeNotFoundException;
 
 import java.util.HashMap;
@@ -18,6 +21,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public String addEmployee(String firstName, String lastName, int department, int salary) { //добавление сотрудника
         Employee newEmployee = new Employee(firstName, lastName, department, salary);
+        if(!StringUtils.isAlpha(newEmployee.getFirstName() + newEmployee.getLastName()) || firstName.isBlank() || lastName.isBlank()) {
+            throw new EmployeeInvalidNameException();
+        }
+        newEmployee.setFirstName(StringUtils.capitalize(StringUtils.lowerCase(newEmployee.getFirstName())));
+        newEmployee.setLastName(StringUtils.capitalize(StringUtils.lowerCase(newEmployee.getLastName())));
         if (employees.containsKey(getKey(newEmployee))) {
             throw new EmployeeAlreadyAddedException();
         }
@@ -48,5 +56,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public String printEmployeeList() {
         return employees.toString();
+    }
+    public Map<String, Employee> getEmployees(){
+        return employees;
     }
 }
